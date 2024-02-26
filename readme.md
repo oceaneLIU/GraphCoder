@@ -41,13 +41,13 @@ The structure of this project is shown as follows:
 
 #### Step 1: Install Requirements
 
-```python
+```
 pip install -r requirements.txt
 ```
 
 #### Step 2: Database Construction
 
-```python
+```
 python build_graph_database.py
 ```
 
@@ -68,7 +68,7 @@ There are 3 input arguments for code retrieval step:
     
 An example for running code retrieval
 
-```python
+```
 python search_code.py --query_cases api_level --mode coarse2fine --gamma 0.1
 ```
 
@@ -91,7 +91,7 @@ There are 5 input arguments for code generation step:
     
 An example for running code generation
 
-```python
+```
 python generate_response.py --input_file_name api_level.search_res.coarse2fine.10 --model gpt-3.5-turbo-instruct --mode retrieval --max_top_k 10 --max_new_tokens 100
 ```
 
