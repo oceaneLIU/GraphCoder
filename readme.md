@@ -76,7 +76,7 @@ python search_code.py --query_cases api_level --mode coarse2fine --gamma 0.1
 
 There are 5 input arguments for code generation step:
 
-  - input_file_name: Input code completion task with/without retrieval
+  - input_file_name: Input code completion task with/without retrieval results
 
   - model: Generation models used in our experiments, including gpt-3.5-turbo-instruct, starcoder(15B), codegen2-16b, codegen2-7b, codegen2-1b
 
@@ -92,6 +92,5 @@ There are 5 input arguments for code generation step:
 An example for running code generation
 
 ```
-python generate_response.py --input_file_name api_level.search_res.coarse2fine.10 --model gpt-3.5-turbo-instruct --mode retrieval --max_top_k 10 --max_new_tokens 100
+python generate_response.py --input_file_name api_level.coarse2fine.10 --model gpt-3.5-turbo-instruct --mode retrieval --max_top_k 10 --max_new_tokens 100
 ```
-
