@@ -39,8 +39,50 @@ class CONSTANTS:
     graph_database_save_dir = f"./context_database"
     query_graph_save_dir = "./graph_based_query"
     dataset_dir = "./RepoEval-Updated"
-    repos = ["opendilab_ACE", "awslabs_fortuna", "huggingface_diffusers", "nerfstudio-project_nerfstudio",
-             "devchat", "metagpt", "nemo_aligner", "task_weaver"]
+    repos = ["devchat",
+             "nemo_aligner",
+             "awslabs_fortuna",
+             "task_weaver",
+             "huggingface_diffusers",
+             "opendilab_ACE",
+             "metagpt",
+             "apple_axlearn",
+             "QingruZhang_AdaLoRA",
+             "nerfstudio-project_nerfstudio",
+             "itlemon_chatgpt4j",
+             "Aelysium-Group_rusty-connector",
+             "neoforged_NeoGradle",
+             "mybatis-flex_mybatis-flex",
+             "Guiqu1aixi_rocketmq",
+             "SimonHalvdansson_Harmonic-HN",
+             "Open-DBT_open-dbt",
+             "QuasiStellar_custom-pixel-dungeon",
+             "gentics_cms-oss",
+             "FloatingPoint-MC_MIN"
+             ]
+
+    repos_language = {
+         "devchat": "python",
+         "nemo_aligner": "python",
+         "awslabs_fortuna": "python",
+         "task_weaver": "python",
+         "huggingface_diffusers": "python",
+         "opendilab_ACE": "python",
+         "metagpt": "python",
+         "apple_axlearn": "python",
+         "QingruZhang_AdaLoRA": "python",
+         "nerfstudio-project_nerfstudio": "python",
+         "itlemon_chatgpt4j": "java",
+         "Aelysium-Group_rusty-connector": "java",
+         "neoforged_NeoGradle": "java",
+         "mybatis-flex_mybatis-flex": "java",
+         "Guiqu1aixi_rocketmq": "java",
+         "SimonHalvdansson_Harmonic-HN": "java",
+         "Open-DBT_open-dbt": "java",
+         "QuasiStellar_custom-pixel-dungeon": "java",
+         "gentics_cms-oss": "java",
+         "FloatingPoint-MC_MIN": "java"
+    }
 
 
 class CodexTokenizer:
@@ -67,8 +109,13 @@ class CodeGenTokenizer:
         return self.tokenizer.decode(token_ids)
 
 
-def iterate_repository_python_file(base_dir, repo):
-    pattern = os.path.join(f'{base_dir}/{repo}', "**", "*.py")
+def iterate_repository_file(base_dir, repo):
+    if CONSTANTS.repos_language[repo] == "python":
+        pattern = os.path.join(f'{base_dir}/{repo}', "**", f"*.py")
+    elif CONSTANTS.repos_language[repo] == "java":
+        pattern = os.path.join(f'{base_dir}/{repo}', "**", f"*.java")
+    else:
+        raise NotImplementedError
     files = glob.glob(pattern, recursive=True)
     return files
 

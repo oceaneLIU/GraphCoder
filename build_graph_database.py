@@ -4,8 +4,8 @@ from tqdm import tqdm
 from networkx.readwrite import json_graph
 from utils.utils import CONSTANTS, CodexTokenizer
 from utils.slicing import Slicing
-from utils.ccg import create_python_graph
-from utils.utils import iterate_repository_python_file, make_needed_dir, set_default, dump_jsonl, graph_to_json
+from utils.ccg import create_graph
+from utils.utils import iterate_repository_file, make_needed_dir, set_default, dump_jsonl, graph_to_json
 
 
 class GraphDatabaseBuilder:
@@ -17,14 +17,14 @@ class GraphDatabaseBuilder:
         return
 
     def build_full_graph_database(self, repo_name):
-        code_files = iterate_repository_python_file(self.repo_base_dir, repo_name)
+        code_files = iterate_repository_file(self.repo_base_dir, repo_name)
         file_num = 0
         make_needed_dir(os.path.join(self.graph_database_save_dir, repo_name))
         with tqdm(total=len(code_files)) as pbar:
             for file in code_files:
                 with open(file, 'r') as f:
                     src_lines = f.readlines()
-                ccg = create_python_graph(src_lines)
+                ccg = create_graph(src_lines, repo_name)
                 if ccg is None:
                     pbar.update(1)
                     continue
@@ -41,8 +41,8 @@ class GraphDatabaseBuilder:
         slicer = Slicing()
         repo_dict = []
 
-        # Get all python file
-        code_files = iterate_repository_python_file(self.repo_base_dir, repo_name)
+        # Get all file
+        code_files = iterate_repository_file(self.repo_base_dir, repo_name)
         repo_base_dir_len = len(self.repo_base_dir.split('/'))
         tokenizer = CodexTokenizer()
         with tqdm(total=len(code_files)) as pbar:
@@ -52,7 +52,7 @@ class GraphDatabaseBuilder:
                 with open(file, 'r') as f:
                     src_lines = f.readlines()
                 # get graph
-                ccg = create_python_graph(src_lines)
+                ccg = create_graph(src_lines, repo_name)
                 if ccg is None:
                     pbar.update(1)
                     continue

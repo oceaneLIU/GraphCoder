@@ -1,8 +1,9 @@
 import networkx as nx
 from tree_sitter import Language, Parser
+from utils.utils import CONSTANTS
 
 
-def python_control_dependence_graph(root_node, CCG, src_lines, parent):
+def control_dependence_graph(root_node, CCG, src_lines, parent):
     node_id = len(CCG.nodes)
 
     if root_node.type in ['import_from_statement', 'import_statement']:
@@ -228,12 +229,12 @@ def python_control_dependence_graph(root_node, CCG, src_lines, parent):
                 CCG.nodes[parent]['defSet'].add(identifier_name)
             else:
                 CCG.nodes[parent]['useSet'].add(identifier_name)
-        python_control_dependence_graph(child, CCG, src_lines, parent)
+        control_dependence_graph(child, CCG, src_lines, parent)
 
     return
 
 
-def python_control_flow_graph(CCG):
+def control_flow_graph(CCG):
     CFG = nx.MultiDiGraph()
 
     next_sibling = dict()
@@ -335,7 +336,7 @@ def python_control_flow_graph(CCG):
     return CFG, edge_list
 
 
-def python_data_dependence_graph(CFG, CCG):
+def data_dependence_graph(CFG, CCG):
     for v in CCG.nodes:
         for u in CCG.nodes:
             if v == u or 'import' in CCG.nodes[v]['nodeType']:
@@ -370,18 +371,18 @@ def python_data_dependence_graph(CFG, CCG):
     return
 
 
-def create_python_graph(code_lines):
+def create_graph(code_lines, repo_name):
 
     src_lines = "".join(code_lines).encode('ascii', errors='ignore').decode('ascii')
     src_lines = src_lines.splitlines(keepends=True)
 
     if len(src_lines) != 0:
         src_lines[-1] = src_lines[-1].rstrip().strip('(').strip('[').strip(',')
-    # Define tree-sitter python parser
-    Language.build_library('./my-languages.so', ['./tree-sitter-python'])
-    py_language = Language('./my-languages.so', 'python')
+    # Define tree-sitter parser
+    Language.build_library('./my-languages.so', ['./tree-sitter-python', './tree-sitter-java'])
+    language = Language('./my-languages.so', CONSTANTS.repos_language[repo_name])
     parser = Parser()
-    parser.set_language(py_language)
+    parser.set_language(language)
 
     if len(src_lines) == 0:
         return None
@@ -393,7 +394,7 @@ def create_python_graph(code_lines):
             src_lines[i] = '\n'
             comment_lines.append(i)
 
-    # Parser python file to get a tree
+    # Parser file to get a tree
     def read_callable(byte_offset, point):
         row, column = point
         if row >= len(src_lines) or column >= len(src_lines[row]):
@@ -413,13 +414,13 @@ def create_python_graph(code_lines):
 
     # Construct control dependence edge
     for child in tree.root_node.children:
-        python_control_dependence_graph(child, ccg, code_lines, None)
+        control_dependence_graph(child, ccg, code_lines, None)
 
     # Construct control flow graph
-    cfg, cfg_edge_list = python_control_flow_graph(ccg)
+    cfg, cfg_edge_list = control_flow_graph(ccg)
 
     # Construct data dependence graph
-    python_data_dependence_graph(cfg, ccg)
+    data_dependence_graph(cfg, ccg)
 
     ccg.add_edges_from(cfg_edge_list)
 

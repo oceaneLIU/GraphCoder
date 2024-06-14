@@ -2,7 +2,7 @@ import os
 import copy
 from tqdm import tqdm
 import networkx as nx
-from utils.ccg import create_python_graph
+from utils.ccg import create_graph
 from utils.slicing import Slicing
 from utils.utils import load_jsonl, make_needed_dir, graph_to_json, CONSTANTS, dump_jsonl, CodexTokenizer
 
@@ -33,7 +33,7 @@ def build_query_subgraph(task_name):
             with open(os.path.join(CONSTANTS.repo_base_dir, case_path), 'r') as f:
                 src_lines = f.readlines()
             query_context = src_lines[:line_no]
-            ccg = create_python_graph(query_context)
+            ccg = create_graph(query_context)
             query_ctx, query_line_list, query_graph = last_n_context_lines_graph(ccg)
             graph_case = dict()
             graph_case['query_forward_graph'] = graph_to_json(query_graph)
@@ -53,7 +53,10 @@ def build_query_subgraph(task_name):
 
 
 if __name__ == "__main__":
-    tasks_name = ["api_level.test", "line_level.test"]
+    tasks_name = ["api_level.java.test", 
+                  "line_level.java.test",
+                  "api_level.python.test",
+                  "line_level.python.test"]
     for task_name in tasks_name:
         build_query_subgraph(task_name)
 

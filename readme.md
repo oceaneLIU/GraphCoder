@@ -23,18 +23,18 @@ The structure of this project is shown as follows:
     ├─ opendilab_ACE
     ├─ metagpt
     ├─ nerfstudio-project_nerfstudio
-    ├─ axlearn
-    ├─ adalora
-    ├─ chatgpt4j
-    ├─ rusty-connector
-    ├─ neogradle
-    ├─ mybatis-flex
-    ├─ rocketmq
-    ├─ harmonic-hn
-    ├─ open-dbt
-    ├─ custom-pixel-dungeon
-    ├─ cms-oss
-    └─ min
+    ├─ apple_axlearn
+    ├─ QingruZhang_AdaLoRA
+    ├─ itlemon_chatgpt4j
+    ├─ Aelysium-Group_rusty-connector
+    ├─ neoforged_NeoGradle
+    ├─ mybatis-flex_mybatis-flex
+    ├─ Guiqu1aixi_rocketmq
+    ├─ SimonHalvdansson_Harmonic-HN
+    ├─ Open-DBT_open-dbt
+    ├─ QuasiStellar_custom-pixel-dungeon
+    ├─ gentics_cms-oss
+    └─ FloatingPoint-MC_MIN
 ├─ tree-sitter-python    # The dependence folder for code context graph generation (tree-sitter parser for python)
 ├─ tree-sitter-java      # The dependence folder for code context graph generation (tree-sitter parser for java)
 ├─ utils
