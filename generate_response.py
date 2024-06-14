@@ -26,7 +26,7 @@ def main(args, input_cases, responses_save_name):
 
     # set model and tokenizer
     if args.model == 'gpt-3.5-turbo-instruct':
-        model = openai.OpenAI(api_key="sk-iW68uq4qP11XSrnM95D99e576277436d9d990d3508013186")
+        model = openai.OpenAI(api_key="")
         tokenizer = CodexTokenizer()
         max_num_tokens = 4096
     elif args.model == 'starcoder':
