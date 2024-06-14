@@ -1,4 +1,4 @@
-# GraphCoder: Enhancing Repository-Level Code Completion via Code Context Graph-based Retrieval and Language Model
+# GraphCoder: Enhancing Repository-Level Code Completion via Coarse-to-fine Retrieval Based on Code Context Graph
 
 ## Overview
 
@@ -8,10 +8,12 @@ In this paper, we propose GraphCoder, a retrieval-augmented code completion fram
 
 The structure of this project is shown as follows:
 
-```python
+```
 ├─ RepoEval-Updated    # Input dataset for code completion tasks
-    ├─ api_level.test.jsonl
-    └─ line_level.test.jsonl
+    ├─ api_level.python.test.jsonl
+    ├─ api_level.java.test.jsonl
+    ├─ line_level.python.test.jsonl
+    └─ line_level.java.test.jsonl
 ├─ repositories    # The original repositories that RepoEval-Updated built from
     ├─ devchat
     ├─ nemo_aligner
@@ -20,8 +22,21 @@ The structure of this project is shown as follows:
     ├─ huggingface_diffusers
     ├─ opendilab_ACE
     ├─ metagpt
-    └─ nerfstudio-project_nerfstudio
+    ├─ nerfstudio-project_nerfstudio
+    ├─ axlearn
+    ├─ adalora
+    ├─ chatgpt4j
+    ├─ rusty-connector
+    ├─ neogradle
+    ├─ mybatis-flex
+    ├─ rocketmq
+    ├─ harmonic-hn
+    ├─ open-dbt
+    ├─ custom-pixel-dungeon
+    ├─ cms-oss
+    └─ min
 ├─ tree-sitter-python    # The dependence folder for code context graph generation (tree-sitter parser for python)
+├─ tree-sitter-java      # The dependence folder for code context graph generation (tree-sitter parser for java)
 ├─ utils
     ├─ __init__.py
     ├─ ccg.py    # Generate a code context graph (CCG) from Python code snippets
