@@ -1,1 +1,0 @@
-SWAG_NAME = "swag"

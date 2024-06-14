@@ -1,1 +1,0 @@
-MAP_NAME = "map"

@@ -1,1 +1,0 @@
-LAPLACE_NAME = "laplace"
