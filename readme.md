@@ -64,6 +64,9 @@ The generation of code context graph is based on tree-sitter
 ```
 git clone https://github.com/tree-sitter/tree-sitter-python
 ```
+```
+git clone https://github.com/tree-sitter/tree-sitter-java
+```
 #### Step 2: Database Construction
 
 ```
