@@ -78,8 +78,8 @@ python build_graph_database.py
 There are 3 input arguments for code retrieval step:
 
   - query_cases: 
-    - `api_level`: Run code retrieval for api-level code completion tasks.
-    - `line_level`: Run code retrieval for line-level code completion tasks.
+    - `api_level.python/java`: Run code retrieval for api-level python/java code completion tasks.
+    - `line_level.python/java`: Run code retrieval for line-level python/java code completion tasks.
 
   - mode:
     - `coarse2fine`: This mode corresponds to the code retrieval method in GraphCoder, which performs coarse-grained retrieval and fine-grained re-ranking.
@@ -91,7 +91,7 @@ There are 3 input arguments for code retrieval step:
 An example for running code retrieval
 
 ```
-python search_code.py --query_cases api_level --mode coarse2fine --gamma 0.1
+python search_code.py --query_cases api_level.python --mode coarse2fine --gamma 0.1
 ```
 
 ### Step 4: Code Generation
@@ -114,5 +114,5 @@ There are 5 input arguments for code generation step:
 An example for running code generation
 
 ```
-python generate_response.py --input_file_name api_level.coarse2fine.10 --model gpt-3.5-turbo-instruct --mode retrieval --max_top_k 10 --max_new_tokens 100
+python generate_response.py --input_file_name api_level.python.coarse2fine.10 --model gpt-3.5-turbo-instruct --mode retrieval --max_top_k 10 --max_new_tokens 100
 ```
