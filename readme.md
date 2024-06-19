@@ -35,8 +35,6 @@ The structure of this project is shown as follows:
     ├─ QuasiStellar_custom-pixel-dungeon
     ├─ gentics_cms-oss
     └─ FloatingPoint-MC_MIN
-├─ tree-sitter-python    # The dependence folder for code context graph generation (tree-sitter parser for python)
-├─ tree-sitter-java      # The dependence folder for code context graph generation (tree-sitter parser for java)
 ├─ utils
     ├─ __init__.py
     ├─ ccg.py    # Generate a code context graph (CCG) from Python code snippets
