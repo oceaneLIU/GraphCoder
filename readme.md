@@ -47,7 +47,7 @@ The structure of this project is shown as follows:
 ├─ search_code.py    # Coarse-to-fine code retrieval
 ├─ generate_response.py    # Generate the predicted statement based on retrieval results
 ├─ requirements.txt    # List of packages required to run GraphCoder
-└─ my-languages.so    # Dependence file for code context graph generation (tree-sitter parser for python)
+└─ my-languages.so    # Dependence file for code context graph generation (tree-sitter parser for python and java)
 ```
 
 ## Quick Start
